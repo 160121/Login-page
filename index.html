@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login page</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&family=Roboto:wght@300&display=swap" rel="stylesheet">    
+    <link rel="stylesheet" href="style.css">
+    <script src="index.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1 class="heading">Login Form</h1>
+        <div class="operations">
+            <button onclick="showlogin()"class="btn btn--1 btn-active" data-tab="loginForm">Login</button>
+            <button onclick="showSignup()" class="btn btn--2" data-tab="signupForm">Signup</button>
+        </div>
+       
+        <div id="loginForm" class="tabcontent tabcontent--1 tabcontent-active" >
+            <form >
+            <input type="email" id="email" name="Email Address" placeholder="Email Address"required>
+            <input type="password" id="password" name="password" placeholder="password"required>
+            <a href="#forgotpassword" class="forgotpassword" onclick="forgotPassword()">Forgot password?</a>
+            <input type="submit" value="Login">
+            <p class="signup">Not a member?<a href="#signupForm" class="signuplink" onclick="showSignup()">Signup now</a></p>
+           </form>
+        </div>
+        <div id="signupForm" class="tabcontent tabcontent--2">
+            <form>
+                <input type="email" id="EmailAddress2" name="Email Address" placeholder="Email Address"required>
+                <input type="password" id="password2" name="password" placeholder="password"required>
+                <input type="password" id="confirmpassword" name="confirm password" placeholder="confirm password"required>
+                <input type="submit" value="Sign up">
+            </form>
+        </div>
+        <div id="forgotpassword" style="display: none;" >
+            <form>
+                <input type="email" id="EmailAddress3" name="Email Address" placeholder="Email Address"required>
+                <input type="password" id="Resetpassword" name="Reset password" placeholder=" Reset password"required>
+                <input type="password" id="password3" name="confirm password" placeholder="confirm password"required>
+                <input type="submit" value="Reset passsword">
+            </form>
+        </div>
+        
+    </div>
+</body>
+</html>
