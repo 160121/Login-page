@@ -35,71 +35,69 @@ window.onload = function() {
     login.addEventListener("submit",function(e){
     e.preventDefault();
     const email=emailInput.value;
-    fetch(`https://reqres.in/api/users?email=${email}`).then(response=>response.json()).then(data=>{
+    fetch(
+      `https://gorest.co.in/public/v2/users?access-token=8fa9815996dbadfe915a7208179c099026e1d39b8993b6e54177260be167266c?email=${email}`
+    )
+      .then((response) => response.json())
+      .then((data) => {
         console.log(data);
-        if(data&&data.data&&data.data.length>0){
-            let user=null;
-            for(let i=0;i<data.data.length;i++){
-                if(data.data[i].email==emailInput.value){
-                    user=data.data[i];
-                    break;
-                }
+        if (data && data.data && data.data.length > 0) {
+          let user = null;
+          for (let i = 0; i < data.data.length; i++) {
+            if (data.data[i].email == emailInput.value) {
+              user = data.data[i];
+              break;
             }
-            if(user){
-                const password=passwordInput.value;
-                if(password==user.first_name){
-                    alert("Login successful🙌🙌");
-                }
-                else{
-                    alert("wrong credentials....🔑🔑");
-                }
-            }
-            else{
-                alert("No user found with this email 🤷‍♀️.please sign up to continue...")
-            }
-        }
-        else{
-            alert("wrong credentials 🤷‍♀️");
-        }
-    }).catch(err=>console.error(err));
-});
-
-//signup
-const signup = document.querySelector("#signupForm");
-const emailInput2 = document.querySelector('#EmailAddress2');
-const password2 = document.querySelector('#password2');
-const confirmpassword = document.querySelector('#confirmpassword');
-signup.addEventListener('submit', function(e) {
-    e.preventDefault();
-    const email = emailInput2.value;
-    fetch(`https://reqres.in/api/users?email=${email}`)
-        .then(response => response.json())
-        .then(data => {
-            if (data && data.data && data.data.length > 0) {
-                let userExists = false;
-                for (let i = 0; i < data.data.length; i++) {
-                    if (data.data[i].email === email) {
-                        userExists = true;
-                        break;
-                    }
-                }
-                if (!userExists) {
-                    const newUser = { email: email, password: password2.value };
-                    data.data.push(newUser);
-                    console.log(data.data);
-                    alert("User added successfully!");
-                } else {
-                    alert("User already exists in the system.");
-                }
+          }
+          if (user) {
+            const password = passwordInput.value;
+            if (password == user.first_name) {
+              alert('Login successful🙌🙌');
             } else {
-                alert("err");
+              alert('wrong credentials....🔑🔑');
             }
+          } else {
+            alert(
+              'No user found with this email 🤷‍♀️.please sign up to continue...'
+            );
+          }
+        } else {
+          alert('wrong credentials 🤷‍♀️');
+        }
+      })
+      .catch((err) => console.error(err));
+  });
+    var form = document.getElementById('signupForm');
+    let data = {
+      email: document.querySelector('#EmailAddress2'),
+      password: document.querySelector('#password2')/*,
+      confirm_password: document.querySelector('#confirmpassword'),*/
+    };
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+      fetch(
+        'https://gorest.co.in/public/v2/users?access-token=8fa9815996dbadfe915a7208179c099026e1d39b8993b6e54177260be167266c',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
+        }
+      )
+        .then(function (response) {
+          if (response.ok) {
+            return response.json();
+          } else {
+            throw new Error('Network response was not ok.');
+          }
         })
-        .catch(error => alert("Error checking for user."));
-});
-
+        .then(function (data) {
+          console.log(data);
+        })
+        .catch(function (error) {
+          console.error('Error:', error);
+        });
+    });
 
 }
-  
-
-
